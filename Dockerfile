@@ -1,8 +1,14 @@
-FROM python:3.7
+# Use a base image with Python installed
+FROM python:3.9
 
-RUN apt-get update -y 
-COPY ./ /app
+# Set the working directory in the container
 WORKDIR /app
-RUN pip install flask
-ENTRYPOINT [ "python" ]
-CMD [ "run.py" ]
+
+# Copy the requirements file into the container
+COPY . .
+
+# Install Python dependencies
+RUN pip install -r requirements.txt
+
+# Specify the command to run the Flask application
+CMD ["python", "run.py"]
